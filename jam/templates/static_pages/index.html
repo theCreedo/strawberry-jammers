@@ -1,0 +1,120 @@
+<!-- HTML -->
+<!DOCTYPE html>
+<!-- English Language -->
+<html lang="en">
+<!-- Header Start -->
+<head>
+	<!-- Company Name -->
+	<title>PlaySet Lyrics</title>
+	<!-- Default Encoding -->
+	<meta charset="utf-8">
+	<!-- Mobile Friendly -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<!-- Header End -->
+
+
+
+<!-- Body Start -->
+<body>
+
+
+	<!-- Company Name Start -->
+	<div class="container-fluid page-header">
+		<h1 align="center" class="text-warning">PlaySet <small>Lyrics</small></h1>
+	</div>
+	<!-- Company Name End -->
+
+
+
+	<!-- Main Panel Start -->
+	<div class="container-fluid">
+
+		<!-- Song List Start -->
+		<div class="col-sm-2 sidenav list-group text-center">
+			<p><a href="#" class="list-group-item active">Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+		</div>
+		<!-- Song List End -->
+
+
+
+		<!-- Tabs Start -->
+		<div class="col-sm-8">
+
+			<!-- Tab Names Start -->
+			<ul class="nav nav-tabs">
+
+				<li class="active"><a data-toggle="tab" href="#search">Search</a></li>
+				<li><a data-toggle="tab" href="#song1">Song 1</a></li>
+
+			</ul>
+			<!-- Tab Names End -->
+
+
+
+			<!-- Tab Content Start -->
+			<div class="tab-content">
+
+				<!-- Search Tab Start -->
+				<div id="search" class="tab-pane fade in active">
+
+					<!-- Search Results Start -->
+					<div class="list-group">
+						{% for song in team.songs|multisort('time_team_join', 'id') %}
+						<div class="center" style="padding-top: 10px;">
+							{% if user.is_leader %} {# assume the first user is the leader #}
+							<p>{{ user.fname }} {{ user.lname }} ({{ user.email }}) - <b>Team Leader</b></p>
+							{% else %}
+							<form method="POST" action="{{ url_for('team') }}" id="remove">
+								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+								<input type="text" name="user" value="{{ user.email }}"
+								class="hidden">{{ user.fname }} {{ user.lname }} ({{ user.email }}) </input>
+								<button class="btn btn-xs" style="width: 30px;" type="submit" name="button" value="remove">💣
+								</button>
+							</form>
+							{% endif %}
+						</div>
+						{% endfor %}
+
+						<a href="#" class="list-group-item">Search Result 1</a>
+						<a href="#" class="list-group-item">Search Result 2</a>
+					</div>
+					<!-- Search Results End -->
+
+				</div>
+				<!-- Search Tab End -->
+
+
+
+				<!-- Song 1 Tab Start -->
+				<div id="song1" class="tab-pane fade">
+					<h3>Lyrics</h3>
+					<p>Put lyrics here.</p>
+				</div>
+				<!-- Song 1 Tab Start -->
+
+			</div>
+			<!-- Tab Content End -->
+
+		</div>
+		<!-- Tabs End -->
+
+	</div>
+	<!-- Main Panel End -->
+
+
+
+</body>
+<!-- Body End -->
+</html>
+<!-- HTML End -->
