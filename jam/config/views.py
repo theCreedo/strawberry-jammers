@@ -1,4 +1,4 @@
-from pepper.app import redis_store
+from jam.app import redis_store
 
 
 def toggle_application_period():

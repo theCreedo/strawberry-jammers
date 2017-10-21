@@ -6,13 +6,13 @@ dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
-from pepper import create_app, app
+from jam import create_app, app
 
-hackathon_identity_app = create_app()
-manager = Manager(hackathon_identity_app)
+jam_app = create_app()
+manager = Manager(jam_app)
 
 # Migration commands for when you create DB
-Migrate(hackathon_identity_app, app.DB)
+Migrate(jam_app, app.DB)
 manager.add_command('db', MigrateCommand)
 
 @manager.command

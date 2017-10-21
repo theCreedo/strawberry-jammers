@@ -1,2 +1,1 @@
-import views
-from models import User
+from jam.users.models import User

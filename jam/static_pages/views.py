@@ -1,5 +1,5 @@
 from flask import request, render_template, redirect, url_for
-from pepper import settings
+from jam import settings
 
 def default(template='index'):
 	template = template if template.endswith('.html') else template+'.html'
