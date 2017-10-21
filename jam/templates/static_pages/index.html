@@ -2,6 +2,76 @@
 <!DOCTYPE html>
 <!-- English Language -->
 <html lang="en">
+<!-- Snackbar -->
+<style>
+	#snackbar {
+		visibility: hidden;
+		min-width: 250px;
+		margin-left: -125px;
+		background-color: #333;
+		color: #fff;
+		text-align: center;
+		border-radius: 2px;
+		padding: 16px;
+		position: fixed;
+		z-index: 1;
+		left: 50%;
+		bottom: 30px;
+		font-size: 17px;
+	}
+
+	#snackbar.show {
+		visibility: visible;
+		-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+		animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	}
+
+	#snackbar2 {
+		visibility: hidden;
+		min-width: 250px;
+		margin-left: -125px;
+		background-color: #333;
+		color: #fff;
+		text-align: center;
+		border-radius: 2px;
+		padding: 16px;
+		position: fixed;
+		z-index: 1;
+		left: 50%;
+		bottom: 30px;
+		font-size: 17px;
+	}
+
+	#snackbar2.show {
+		visibility: visible;
+		-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+		animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	}
+
+	@-webkit-keyframes fadein {
+		from {bottom: 0; opacity: 0;} 
+		to {bottom: 30px; opacity: 1;}
+	}
+
+	@keyframes fadein {
+		from {bottom: 0; opacity: 0;}
+		to {bottom: 30px; opacity: 1;}
+	}
+
+	@-webkit-keyframes fadeout {
+		from {bottom: 30px; opacity: 1;} 
+		to {bottom: 0; opacity: 0;}
+	}
+
+	@keyframes fadeout {
+		from {bottom: 30px; opacity: 1;}
+		to {bottom: 0; opacity: 0;}
+	}
+</style>
+<!-- Snackbar -->
+
+
+
 <!-- Header -->
 <head>
 	<!-- Company Name -->
@@ -29,14 +99,45 @@
 
 
 
-<!-- Join Button -->
 <script type="text/javascript">
+
+	// Join Button
 	function joinPlaySet() {
 		var newBody = document.getElementById("modal-body-join").innerHTML;
 		document.getElementById("modal-body").innerHTML = newBody;
 	}
+
+	// Snackbar
+	function addSong() {
+	    // Get the snackbar DIV
+	    var x = document.getElementById("snackbar");
+
+	    // Add the "show" class to DIV
+	    x.className = "show";
+
+	    // After 3 seconds, remove the show class from DIV
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	}
+
+	// Create session (display a notification) 
+	function createSession() {
+	    // Get the snackbar DIV
+	    var x = document.getElementById("snackbar2");
+
+	    // Add the "show" class to DIV
+	    x.className = "show";
+
+	    // After 3 seconds, remove the show class from DIV
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	}
+
+	// Join session
+	function joinSession() {
+		document.getElementById('modal-body').innerHTML = 'worked';
+	}
+
 </script>
-<!-- Join Button -->
+<!-- Join Button --> <!-- Snackbar -->
 
 
 
@@ -68,7 +169,7 @@
 
 					<!-- Join/Create Buttons-->
 					<div id="modal-body" class="modal-body" align="center">	
-						<button type="button" class="btn btn-lg btn-success" data-dismiss="modal">Create</button>
+						<button type="button" class="btn btn-lg btn-success" data-dismiss="modal" onclick="createSession()">Create</button>
 						<button id="join" type="button" class="btn btn-lg btn-danger" onclick="joinPlaySet()">Join</button>
 					</div>
 					<!-- Join/Create Buttons-->
@@ -80,11 +181,12 @@
 						<form>
 							<div class="input-group">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit">
-										<i class="glyphicon glyphicon-search"></i>
+									<button id = "join-session" class="btn btn-default" type="submit" onclick="joinSession()">
+										<i class="glyphicon glyphicon-headphones"></i>
 									</button>
 								</div>
-								<input type="number" class="form-control" placeholder="Enter ID">
+								<input type="text" class="form-control" placeholder="Enter ID"
+								onkeyup = "if (event.keyCode == 13)">
 							</div>
 						</form>
 
@@ -127,11 +229,12 @@
 			<form>
 				<div class="input-group">
 					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
+						<button id='search-button' class="btn btn-default" type="submit" onclick="populate_search_results()">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
 					</div>
-					<input type="text" class="form-control" placeholder="Search">
+					<input id='user-input' type="text" class="form-control" placeholder="Search" 
+					onkeyup = "if (event.keyCode == 13)">
 				</div>
 			</form>
 			<!-- Search Bar -->
@@ -139,16 +242,16 @@
 			<br>
 
 			<!-- Tab Names -->
-			<ul class="nav nav-tabs">
+			<ul id = 'song-list' class="nav nav-tabs">
 
 				<!-- TO DO: Show search results when a search is performed -->
 				<li class="active hide"><a data-toggle="tab" href="#search">Search Results</a></li>
 
 				<!-- TO DO: For every song in a variable that stores the user's selected songs, 
 				create a tab for that song -->
-				<!-- <li><a data-toggle="tab" href="#">Song 1</a></li> -->
+				<li id='results_string' class="hide"><a data-toggle="tab" href="#">Search Results</a></li>
 
-			</ul>
+				</ul>
 			<!-- Tab Names -->
 
 
@@ -160,18 +263,11 @@
 				<div id="search" class="tab-pane fade in active">
 
 					<!-- Search Results -->
-					<div class="list-group">
+					<div id="search-results" class="list-group"></div>
+					<!-- Search Results -->
 
-						<!-- TO DO: For every search result, display it.-->
-<!-- 					{% for song in songs %}
-						<a href="#" class="list-group-item">{song.name}</a>
-						{% endfor %}
-					-->
 				</div>
-				<!-- Search Results -->
-
-			</div>
-			<!-- Search Tab -->
+				<!-- Search Tab -->
 
 
 
@@ -190,18 +286,29 @@
 				<!-- Song Tab -->
 
 
+			</div>
+			<!-- Tab Content -->
+
 		</div>
-		<!-- Tab Content -->
+		<!-- Tabs -->
 
 	</div>
-	<!-- Tabs -->
+	<!-- Main Panel -->
 
-</div>
-<!-- Main Panel -->
 
+	<!-- Snackbar Success-->
+	<div id="snackbar">Success! Song added.</div>
+	<!-- Snackbar Success-->
+
+	<!-- Snackbar Session Created-->
+	<div id="snackbar2">Success! Add songs above.</div>
+	<!-- Snackbar Session Created-->
+
+
+	<script src="populate_data.js"></script>
 
 
 </body>
 <!-- Body -->
 </html>
-<!-- HTML -->
+<!-- HTML
