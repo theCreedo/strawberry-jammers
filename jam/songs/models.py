@@ -6,8 +6,10 @@ from jam.users.helpers import hash_pwd
 class Song(DB.Model):
     __tablename__ = 'songs'
 
+    id = DB.Column(DB.Integer, primary_key=True)
     name = DB.Column(DB.String(255))
-    genius_id = DB.Column(DB.Integer, primary_key=True)
+    genius_id = DB.Column(DB.Integer)
+    lyrics = DB.Column(DB.Text)
 
     def __init__(self, dictionary):
         self.name = dictionary['name']
@@ -22,3 +24,5 @@ class SongSet(DB.Model):
 
 	def __init__(self, dictionary):
 		self.name = dictionary['name']
+		self.key = dictionary['key']
+		self.songs = dictionary['songs']
