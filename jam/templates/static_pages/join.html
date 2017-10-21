@@ -1,0 +1,132 @@
+<!-- HTML -->
+<!DOCTYPE html>
+<!-- English Language -->
+<html lang="en">
+
+<!-- Header -->
+<head>
+        <!-- Company Name -->
+        <title>PlaySet Lyrics</title>
+        <!-- Default Encoding -->
+        <meta charset="utf-8">
+        <!-- Mobile Friendly -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+<!-- Header -->
+    
+
+
+
+<!-- Body -->
+<body>
+    
+    <!-- Company Name -->
+    <div class="container-fluid page-header">
+        <h1 align="center" class="text-warning">PlaySet <small>Lyrics</small></h1>
+    </div>
+    <!-- Company Name -->
+
+    <!-- Main Panel -->
+    <div class="container-fluid">
+
+        <!-- Song List Container -->
+        <div id="songListContainer" class="col-sm-2 sidenav list-group text-center"> </div>
+        <!-- Song List Container -->
+
+        <!-- Tabs -->
+        <div class="col-sm-8">
+
+			<!-- Tab Names -->
+			<ul id = 'song-list' class="nav nav-tabs">
+                    
+                <!-- TO DO: First song is default shown -->
+                <li class="active"><a data-toggle="tab" href="#song1">Song 1</a></li>
+
+                <!-- TO DO: For every song in a variable that stores the user's selected songs, 
+                create a tab for that song - right now hardcoded 4 songs total -->
+                <li><a data-toggle="tab" href="#song2">Song 2</a></li>
+                <li><a data-toggle="tab" href="#song3">Song 3</a></li>
+                <li><a data-toggle="tab" href="#song4">Song 4</a></li>
+
+                </ul>
+            <!-- Tab Names -->
+
+
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+
+                <!-- Content of First Song -->
+                <div id="song1" class="tab-pane fade in active">
+
+                    <!-- Title and Lyrics -->
+                    <h3>SONG 1 TITLE</h3>
+                    <div class='lyrics'>SONG 1 LYRICS</div> <!-- add class 'lyrics' to .css file -->
+                    <!-- Title and Lyrics -->
+
+                </div>
+                <!-- Content of First Song -->
+                
+                <!-- Content of Other Songs -->
+                <div id="song2" class="tab-pane fade in">
+                        
+                    <!-- Title and Lyrics -->
+                    <h3>SONG 2 TITLE</h3>
+                    <div class='lyrics'>SONG 2 LYRICS</div> <!-- add class 'lyrics' to .css file -->
+                    <!-- Title and Lyrics -->
+
+                </div>
+                <div id="song3" class="tab-pane fade in">
+                        
+                    <!-- Title and Lyrics -->
+                    <h3>SONG 3 TITLE</h3>
+                    <div class='lyrics'>SONG 3 LYRICS</div> <!-- add class 'lyrics' to .css file -->
+                    <!-- Title and Lyrics -->
+
+                </div>
+                <div id="song4" class="tab-pane fade in">
+                        
+                    <!-- Title and Lyrics -->
+                    <h3>SONG 4 TITLE</h3>
+                    <div class='lyrics'>SONG 4 LYRICS</div> <!-- add class 'lyrics' to .css file -->
+                    <!-- Title and Lyrics -->
+
+                </div>
+                
+                <!-- Content of Other Songs -->
+                
+
+                    
+                <!-- Song Tab -->
+
+                <!-- TO DO: For every selected song (i.e. a song with its own tab) 
+                display it's lyrics -->
+<!--  				{% for song in songs %}
+
+                <div class="tab-pane fade">
+                    <h3>Lyrics</h3>
+                    <p>{song.lyrics}</p>
+                </div>
+
+                {% endfor %} -->
+                <!-- Song Tab -->
+
+
+            </div>
+            <!-- Tab Content -->
+
+        </div>
+        <!-- Tabs -->
+
+    </div>
+    <!-- Main Panel -->
+
+</body>
+<!-- Body -->
+
+</html>
+<!-- HTML -->
