@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="import" href="../static_pages/header.html">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script> 
+        $(function(){ 
+          $("#footer").load("../static_pages/footer.html"); 
+        });
+    </script> 
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+      <a href="{{ url_for('landing') }}" class="navbar-left"><img class="logo" src="../../static/img/logo.png"></a>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('landing') }}"><b>TasteAI</b></a>
+    </div>
+    <ul class="nav navbar-nav">
+    {% if current_user.is_auth %}
+      <li><a href="{{ url_for('learn') }}">Learn My Taste</a></li>
+      <li><a href="{{ url_for('brew') }}">Brew My Recipe</a></li>
+      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+    {% endif %}
+    {% if not current_user.is_auth %}
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+    {% if current_user.is_auth %}
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
+  
+<div class="jumbotron text-center">
+    <img class ="animated infinite bounce" src="../../static/img/logo.png"/>
+    
+
+    <h2>Hmm......</h2>
+    <p style ="margin-top:25px">
+        Your sample size ({{current_user.num_of_dishes}}) is too small!
+    </p>
+    <p>
+        Let me learn more about your taste first for at least 5 times!
+    </p>
+
+</div>
+<div class="footer" id="footer"></div>
+</body>
+</html>

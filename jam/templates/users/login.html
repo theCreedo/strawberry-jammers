@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
+  <title>TasteAI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    
+    <style>
+        .navbar-brand,
+        .navbar-nav li a {
+            line-height: 75px;
+            height: 75px;
+            padding-top: 0;
+        }
+        .logo{
+            height:50px;
+            width: 75px;
+            margin-top:13px;
+        }
+        .jumbotron {
+            margin-bottom: 0;
+            background-color: coral;
+            color: #fff;
+            padding: 100px 25px;
+            font-family: Montserrat, sans-serif;
+        }
+        .row{
+            padding:20px;   
+        }
+        .button {
+            background-color: grey; /* Green */
+            border: solid;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+    
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+      <a href="{{ url_for('landing') }}" class="navbar-left"><img class="logo" src="../../static/img/logo.png"></a>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('landing') }}"><b>TasteAI</b></a>
+    </div>
+    <ul class="nav navbar-nav">
+    {% if current_user.is_auth %}
+      <li><a href="{{ url_for('learn') }}">Learn My Taste</a></li>
+      <li><a href="{{ url_for('brew') }}">Brew My Recipe</a></li>
+      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+    {% endif %}
+    {% if not current_user.is_auth %}
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+    {% if current_user.is_auth %}
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
+    <div class="center col-md-6 col-md-offset-3">
+        <h2>Login to your account.</h2>
+        <form action="login" method="POST">
+            <input type="text" placeholder="Email" name="email" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <p>Need an account? Register <a href="/register" class="">here</a></p>
+    </div>
+</body>
+</html>
