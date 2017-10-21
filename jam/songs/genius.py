@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-# GENIUS_KEY = 'aXVdNmQrmI4YZnwC0swJCq9MubVwMXwhH60qlMO8nBU6XuFMkO-cwc0f3GxG5yWm'
 GENIUS_BASE_URL = "http://api.genius.com"
 
 class Genius:
