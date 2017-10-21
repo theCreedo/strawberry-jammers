@@ -8,16 +8,17 @@ from flask.ext.login import LoginManager, current_user
 from flask_sslify import SSLify
 # from flask_redis import Redis
 import sendgrid
-import settings
+# import jam.settings
+from jam import settings
 import structlog
 import pickle
 
 DB = SQLAlchemy()
 
 # from dishes.models import Dish
-from users.models import User
-import routes
-
+from jam.users.models import User
+# import jam.routes
+from jam import routes
 
 # def configure_login(app):
 #     login_manager = LoginManager()
@@ -116,7 +117,7 @@ def create_app():
 
     # redis_store.init_app(app)
     routes.configure_routes(app)
-    configure_login(app)
+    # configure_login(app)
     configure_logger(app)
     setup_error_handlers(app)
 
