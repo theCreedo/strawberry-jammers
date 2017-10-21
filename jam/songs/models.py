@@ -23,7 +23,7 @@ class SongSet(DB.Model):
 	id = DB.Column(DB.Integer, primary_key=True)
 	name = DB.Column(DB.String(255)) #name of group/set
 	key = DB.Column(DB.String(6)) #url key
-	songs_join = DB.relationship('Song', secondary=songs_join, backref='songs')
+	songs_join = DB.relationship('Song', secondary=songs_join, backref=DB.backref('songs', lazy=True))
 
 	def __init__(self, dictionary):
 		self.name = dictionary['name']

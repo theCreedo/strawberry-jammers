@@ -16,7 +16,7 @@ import pickle
 DB = SQLAlchemy()
 
 # from dishes.models import Dish
-from jam.songs.models import *
+from jam.songs.models import Song, SongSet
 # import jam.routes
 from jam import routes
 from jam.songs.genius import *
@@ -112,23 +112,25 @@ def setup_error_handlers(app):
 #             DB.session.commit()
 
 def populate_db(jam_app):
-    g = Genius(settings.GENIUS_KEY)
-    sets = [['What a beautiful name', '10,000 reasons bless the Lord', 'He is exalted'], ['Touch the sky', 'Oceans']]
-    for s in sets:
-        sset = SongSet({'name': 'im a songset', 'key': '242iuh', 'songs': []})
+    
+    with jam_app.app_context():
+        g = Genius(settings.GENIUS_KEY)
+        sets = [['What a beautiful name', '10,000 reasons bless the Lord', 'He is exalted'], ['Touch the sky', 'Oceans']]
+        for s in sets:
+            sset = SongSet({'name': 'im a songset', 'key': '242iuh', 'songs': []})
 
-        for song in s:
-            searchresults = g.search(song)
-            # send searchresults to frontend
-            # get song entry back
-            songentry = g.hitstoreadable(searchresults)[0]
-            lyrics = g.get_lyrics(songentry['api_path'])
-            songentry['lyrics'] = lyrics
-            newsong = Song(songentry)
-            sset.songs.append(newsong)
-            with jam_app.app_context():
-                DB.session.add(sset)
-                DB.session.commit()
+            for song in s:
+                searchresults = g.search(song)
+                # send searchresults to frontend
+                # get song entry back
+                songentry = g.hitstoreadable(searchresults)[0]
+                lyrics = g.get_lyrics(songentry['api_path'])
+                songentry['lyrics'] = lyrics
+                newsong = Song(songentry)
+                sset.songs_join.append(newsong)
+                DB.session.add(newsong)
+            DB.session.add(sset)
+            DB.session.commit()
             
 
 def create_app():
