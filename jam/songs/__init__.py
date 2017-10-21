@@ -1,2 +1,2 @@
 from jam.songs.models import Song
-import views
+from jam.songs import views
