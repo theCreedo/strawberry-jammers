@@ -116,7 +116,7 @@ def create_app():
 
     # redis_store.init_app(app)
     routes.configure_routes(app)
-    configure_login(app)
+    # configure_login(app)
     configure_logger(app)
     setup_error_handlers(app)
 
