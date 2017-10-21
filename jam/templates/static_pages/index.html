@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <!-- English Language -->
 <html lang="en">
-<!-- Header Start -->
+<!-- Header -->
 <head>
 	<!-- Company Name -->
 	<title>PlaySet Lyrics</title>
@@ -15,106 +15,193 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<!-- Header End -->
+<!-- Header -->
 
 
 
-<!-- Body Start -->
+<!-- Load Modal -->
+<script type="text/javascript">
+	$(window).on('load',function(){
+		$('#myModal').modal('show');
+	});
+</script>
+<!-- Load Modal -->
+
+
+
+<!-- Join Button -->
+<script type="text/javascript">
+	function joinPlaySet() {
+		var newBody = document.getElementById("modal-body-join").innerHTML;
+		document.getElementById("modal-body").innerHTML = newBody;
+	}
+</script>
+<!-- Join Button -->
+
+
+
+<!-- Body -->
 <body>
 
-
-	<!-- Company Name Start -->
+	<!-- Company Name -->
 	<div class="container-fluid page-header">
 		<h1 align="center" class="text-warning">PlaySet <small>Lyrics</small></h1>
 	</div>
-	<!-- Company Name End -->
+	<!-- Company Name -->
 
 
+	<!-- Modal -->
+	<div class="container">
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
 
-	<!-- Main Panel Start -->
-	<div class="container-fluid">
+				<!-- Modal Content -->
+				<div class="modal-content">
 
-		<!-- Song List Start -->
-		<div class="col-sm-2 sidenav list-group text-center">
-			<p><a href="#" class="list-group-item active">Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-		</div>
-		<!-- Song List End -->
-
-
-
-		<!-- Tabs Start -->
-		<div class="col-sm-8">
-
-			<!-- Tab Names Start -->
-			<ul class="nav nav-tabs">
-
-				<li class="active"><a data-toggle="tab" href="#search">Search</a></li>
-				<li><a data-toggle="tab" href="#song1">Song 1</a></li>
-
-			</ul>
-			<!-- Tab Names End -->
-
-
-
-			<!-- Tab Content Start -->
-			<div class="tab-content">
-
-				<!-- Search Tab Start -->
-				<div id="search" class="tab-pane fade in active">
-
-					<!-- Search Results Start -->
-					<div class="list-group">
-						{% for song in team.songs|multisort('time_team_join', 'id') %}
-						<div class="center" style="padding-top: 10px;">
-							{% if user.is_leader %} {# assume the first user is the leader #}
-							<p>{{ user.fname }} {{ user.lname }} ({{ user.email }}) - <b>Team Leader</b></p>
-							{% else %}
-							<form method="POST" action="{{ url_for('team') }}" id="remove">
-								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-								<input type="text" name="user" value="{{ user.email }}"
-								class="hidden">{{ user.fname }} {{ user.lname }} ({{ user.email }}) </input>
-								<button class="btn btn-xs" style="width: 30px;" type="submit" name="button" value="remove">💣
-								</button>
-							</form>
-							{% endif %}
-						</div>
-						{% endfor %}
-
-						<a href="#" class="list-group-item">Search Result 1</a>
-						<a href="#" class="list-group-item">Search Result 2</a>
+					<!-- Logo -->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h1 align="center" class="text-warning">PlaySet <small>Lyrics</small></h1>
 					</div>
-					<!-- Search Results End -->
+					<!-- Logo -->
+
+
+					<!-- Join/Create Buttons-->
+					<div id="modal-body" class="modal-body" align="center">	
+						<button type="button" class="btn btn-lg btn-success" data-dismiss="modal">Create</button>
+						<button id="join" type="button" class="btn btn-lg btn-danger" onclick="joinPlaySet()">Join</button>
+					</div>
+					<!-- Join/Create Buttons-->
+
+
+					<!-- Enter Join ID -->
+					<div id="modal-body-join" class="modal-body hide" align="center">	
+
+						<form>
+							<div class="input-group">
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="submit">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+								<input type="number" class="form-control" placeholder="Enter ID">
+							</div>
+						</form>
+
+					</div>
+					<!-- Enter Join ID -->
 
 				</div>
-				<!-- Search Tab End -->
-
-
-
-				<!-- Song 1 Tab Start -->
-				<div id="song1" class="tab-pane fade">
-					<h3>Lyrics</h3>
-					<p>Put lyrics here.</p>
-				</div>
-				<!-- Song 1 Tab Start -->
+				<!-- Modal Content -->
 
 			</div>
-			<!-- Tab Content End -->
 
 		</div>
-		<!-- Tabs End -->
 
 	</div>
-	<!-- Main Panel End -->
+	<!-- Modal -->
+
+
+
+	<!-- Main Panel -->
+	<div class="container-fluid">
+
+		<!-- Song List Container -->
+		<div id="songListContainer" class="col-sm-2 sidenav list-group text-center"> </div>
+		<!-- Song List Container -->
+
+		<!-- TO DO: Implement a function that changes songListContainer to songListActual.
+		AND for every selected song, display a list-grou-item. -->
+		<!-- Actual Song List -->
+		<div id="songListActual" class="col-sm-2 sidenav list-group text-center hide">
+			<p><a href="#" class="list-group-item active">Song</a></p>
+			<p><a href="#" class="list-group-item" >Song</a></p>
+		</div>
+		<!-- Actual Song List -->
+
+
+		<!-- Tabs -->
+		<div class="col-sm-8">
+
+			<!-- Search Bar -->
+			<form>
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+			</form>
+			<!-- Search Bar -->
+
+			<br>
+
+			<!-- Tab Names -->
+			<ul class="nav nav-tabs">
+
+				<!-- TO DO: Show search results when a search is performed -->
+				<li class="active hide"><a data-toggle="tab" href="#search">Search Results</a></li>
+
+				<!-- TO DO: For every song in a variable that stores the user's selected songs, 
+				create a tab for that song -->
+				<!-- <li><a data-toggle="tab" href="#">Song 1</a></li> -->
+
+			</ul>
+			<!-- Tab Names -->
+
+
+
+			<!-- Tab Content -->
+			<div class="tab-content">
+
+				<!-- Search Tab -->
+				<div id="search" class="tab-pane fade in active">
+
+					<!-- Search Results -->
+					<div class="list-group">
+
+						<!-- TO DO: For every search result, display it.-->
+<!-- 					{% for song in songs %}
+						<a href="#" class="list-group-item">{song.name}</a>
+						{% endfor %}
+					-->
+				</div>
+				<!-- Search Results -->
+
+			</div>
+			<!-- Search Tab -->
+
+
+
+				<!-- Song Tab -->
+
+				<!-- TO DO: For every selected song (i.e. a song with its own tab) 
+				display it's lyrics -->
+<!--  				{% for song in songs %}
+
+				<div class="tab-pane fade">
+					<h3>Lyrics</h3>
+					<p>{song.lyrics}</p>
+				</div>
+
+				{% endfor %} -->
+				<!-- Song Tab -->
+
+
+		</div>
+		<!-- Tab Content -->
+
+	</div>
+	<!-- Tabs -->
+
+</div>
+<!-- Main Panel -->
 
 
 
 </body>
-<!-- Body End -->
+<!-- Body -->
 </html>
-<!-- HTML End -->
+<!-- HTML -->
