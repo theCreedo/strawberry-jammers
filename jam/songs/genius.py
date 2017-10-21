@@ -45,7 +45,7 @@ class Genius:
         return hits
 
     def hitstoreadable(self, hits):
-        return [{'name': hit['result']['title'], 'artist': hit['result']['primary_artist']['name'], 'api_path': hit['result']['api_path']} for hit in hits]
+        return [{'genius_id': hit['result']['id'], 'name': hit['result']['title'], 'artist': hit['result']['primary_artist']['name'], 'api_path': hit['result']['api_path']} for hit in hits]
 
     def get_song_info(self, id, text_format='dom'):
         song_url = GENIUS_BASE_URL + "/songs" + "/" + str(id)
