@@ -11,7 +11,12 @@ import urllib,json
 
 
 def landing():
-	return render_template("static_pages/index.html", current_user=current_user)
+	if request.method == 'GET':
+		return render_template("static_pages/index.html", current_user=current_user)
+	#if request.method == 'POST':
+		#redirect to some new unique URL if create
+		#redirect to created url if join + enter unique code
+
 
 def error404():
 	return render_template("static_pages/404.html", current_user=current_user)
