@@ -10,13 +10,12 @@ class Genius:
         self.genius_header = {'Authorization': 'Bearer %s' %(genius_key)}
 
     def get_first_lyrics(self, search_term):
-        hits = self.search(song_title)
+        hits = self.search(search_term)
         readable = self.hitstoreadable(hits)
         if len(readable) > 0:
             song_api_path = readable[0]['api_path']
             return self.get_lyrics(song_api_path)
-        return:
-            'Could not find lyrics\n'
+        return 'Could not find lyrics\n'
 
     def get_lyrics(self, api_path):
         song_url = GENIUS_BASE_URL + api_path
@@ -29,6 +28,7 @@ class Genius:
         soup = BeautifulSoup(page.text, 'html.parser')
         div = soup.find('div',{'class': 'song_body-lyrics'})
         lyrics = div.find('p').getText()
+        return lyrics
 
 
     def search(self, search_term):
@@ -45,10 +45,10 @@ class Genius:
 
         return hits
 
-    def hitstoreadable(hits):
+    def hitstoreadable(self, hits):
         return [{'name': hit['result']['title'], 'artist': hit['result']['primary_artist']['name'], 'api_path': hit['result']['api_path']} for hit in hits]
 
-    def get_song_info(id, text_format='dom'):
+    def get_song_info(self, id, text_format='dom'):
         song_url = GENIUS_BASE_URL + "/songs" + "/" + str(id)
         data = {'text_format': text_format }
 
