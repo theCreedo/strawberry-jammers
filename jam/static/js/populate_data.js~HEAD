@@ -14,11 +14,6 @@ var lyrics_counter = 0;
 function populate_search_results() {
 	// song_name = document.getElementById('user-input').value;
 
-	var loader = document.getElementById('loader2');
-	loader.remove('')
-	awaitSleep(2000);
-	remove_loader();
-
 	document.getElementById('search_results').classList.remove('hide');
 
 	for (var i = 0; i < song_name.length; i++) {
@@ -84,13 +79,4 @@ function addEventListener() {
 };
 
 function addEventListenerForSongView() {
-	$(this).addClass('active')
-}
-
-function remove_loader() {
-	$('#loader2').addClass('hide');
-}
-
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
+	$(this).addClass('active')}

@@ -406,12 +406,11 @@
 
 				<!-- TO DO: For every selected song (i.e. a song with its own tab) 
 				display it's lyrics -->
- 				{% for song in songs %}
+ 				{% for song_name in song_names %}
 
 				<div class="tab-pane fade">
-					<h2>{song.name}</h2>
-					<h3>Lyrics</h3>
-					<p>{song.lyrics}</p>
+					<h3>Song Name</h3>
+					<p>{song_name}</p>
 				</div>
 
 				{% endfor %}
@@ -437,6 +436,11 @@
 	<!-- Snackbar Session Created-->
 
 
+<<<<<<< HEAD
+=======
+	<script src="../static/js/populate_data.js"></script>
+
+>>>>>>> 1d440efbfc5af724f3f35764677dca1ddf18ce81
 
 </body>
 <!-- Body -->

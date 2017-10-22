@@ -11,10 +11,29 @@ lyrics = ['To the cross I look, to the cross I cling<br>Of its suffering I do dr
 '[Chorus]<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br><br>[Verse 1]<br>Well, the burning bush told me just the other day<br>That I should come over here and say<br>Got to get my people out of Pharaohs hand<br>And lead them on over to the Promised Land<br><br>[Chorus]<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br><br>[Verse 2]<br>Well, all of Gods people came to the Red Sea<br>With Pharaohs army coming after me<br>I raised my rod, stuck it in the sand<br>And all of Gods people walked across dry land<br><br>[Chorus]<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br><br>[Verse 3]<br>Well, all of Pharaohs army was coming too<br>So what do you think that I did do?<br>I raised my rod and cleared my throat<br>And all of Pharaohs army did the dead mans float<br><br>[Chorus]<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br>I say Pharaoh, Pharaoh<br>Oh baby let my people go!<br>Huh! Yeah, yeah, yeah<br><br>[Additional Chorus added by unknown]<br>Well, that is the story of the stubborn goat<br>Pharaoh should have known that chariots do not float<br>The lesson is simple, it is easy to find<br>When God says, "GO!" you had better mind!<br>“, “Before the throne of God above<br>I have a strong and perfect Plea<br>A great High Priest whose name is Love<br>Who ever lives and pleads for me<br><br>My name is graven on His hands<br>My name is written on His heart<br>I know that while in Heaven He stands<br>No tongue can bid me thence depart<br>No tongue can bid me thence depart<br><br>When Satan tempts me to despair<br>And tells me of the guilt within<br>Upwards I look and see Him there<br>Who made an end to all my sin<br><br>Because the sinless Savior died<br>My sinful soul is counted free<br>For God the Just is satisfied<br>To look on Him and pardon me<br>To look on Him and pardon me<br><br>Behold Him there, the risen Lamb<br>My perfect spotless Righteousness<br>The great unchangeable I Am<br>The King of glory and of grace<br><br>One with Himself, I cannot die<br>My soul is purchased by His blood<br>My life is hid with Christ on high<br>With Christ, my Savior and my God<br>With Christ, my Savior and my God<br><br>One with Himself, I cannot die<br>My soul is purchased by His blood<br>My life is hid with Christ on high<br>With Christ, my Savior and my God<br>With Christ, my Savior and my God'];
 var lyrics_counter = 0;
 
+
+var song_name = $.ajax({
+	url: '/getSongName',
+	success: function(data) {
+		console.log(data);
+	},
+	error: function() {
+		console.log('error found')
+	}
+
+});
+
 function populate_search_results() {
 	// song_name = document.getElementById('user-input').value;
 
+	var loader = document.getElementById('loader2');
+	loader.remove('')
+	awaitSleep(2000);
+	remove_loader();
+
 	document.getElementById('search_results').classList.remove('hide');
+
+	// console.log("song name: " song_name[0])
 
 	for (var i = 0; i < song_name.length; i++) {
 		var song_item = '<a id="song' 
@@ -79,4 +98,13 @@ function addEventListener() {
 };
 
 function addEventListenerForSongView() {
-	$(this).addClass('active')}
+	$(this).addClass('active')
+}
+
+function remove_loader() {
+	$('#loader2').addClass('hide');
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}

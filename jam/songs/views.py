@@ -15,7 +15,11 @@ def landing():
 	if request.method == 'GET':
 		song_names = DB.session.query(distinct(Song.name)).all()
         song_names.sort()
-		return render_template("static_pages/index.html", song_names=song_names)
+		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names)
+
+# def getSongNames():
+# 	song_name = ["Sweetly Broken", "How Great Is Our God"]
+# 	return song_name
 
 
 def error404():
