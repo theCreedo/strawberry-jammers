@@ -31,6 +31,7 @@ function populate_search_results() {
 	// awaitSleep(2000);
 	// remove_loader();
 
+	document.getElementById('search-results').innerHTML='';
 	document.getElementById('search_results').classList.remove('hide');
 
 	// console.log("song name: " song_name[0])
