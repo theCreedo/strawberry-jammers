@@ -65,7 +65,7 @@ function addEventListener() {
 		var tab_item = '<div id="' + id + '" class="tab-pane fade in text-center" >'
 		+ '<div><br>';
 
-		tab_item += lyrics[lyrics_counter];
+		tab_item += lyrics[lyrics_counter - 1];
 		tab_item = tab_item + '</div>';
 		lyrics_counter++;
 

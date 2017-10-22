@@ -1,0 +1,8 @@
+TODO Jamming
+------------
+Refactoring html files so Modals show up.
+Get lyrics to be displayed.
+Get Genius to actually fill the database.
+Get connection between database and outputted lyrics.
+Create Sessions data model.
+Flesh out Songs and Song Set's data.

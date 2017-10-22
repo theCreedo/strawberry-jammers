@@ -6,6 +6,8 @@ songs_join = DB.Table('songs_join',
 	DB.Column('song_id', DB.Integer, DB.ForeignKey('songs.id'), primary_key=True),
 	DB.Column('songset_id', DB.Integer, DB.ForeignKey('songsets.id'), primary_key=True))
 
+
+
 class Song(DB.Model):
     __tablename__ = 'songs'
 
@@ -16,6 +18,13 @@ class Song(DB.Model):
 
     def __init__(self, dictionary):
         self.name = dictionary['name']
+
+
+
+
+
+
+
 
 class SongSet(DB.Model):
 	__tablename__ = 'songsets'

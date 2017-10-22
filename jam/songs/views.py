@@ -15,14 +15,18 @@ from sqlalchemy import distinct
 def landing():
 	if request.method == 'GET':
 		song_names = DB.session.query(distinct(Song.name)).all()
-		# song_names = [filter(lambda x: x[0] is not None, filter_list) for filter_list in
-		#                                     [song_names]]
-		# song_names = [map(lambda x: x[0], filter_list) for filter_list in
-		#                                     [song_names]]
+		song_names = [filter(lambda x: x[0] is not None, filter_list) for filter_list in
+		                                    [song_names]]
+		song_names = [map(lambda x: x[0], filter_list) for filter_list in
+		                                    song_names]
 		song_names.sort()
-		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names)
+		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names[0])
 	else:
 		song_names = DB.session.query(distinct(Song.name)).all()
+		song_names = [filter(lambda x: x is not None, filter_list) for filter_list in
+		                                    [song_names]]
+		song_names = [map(lambda x: x[0], filter_list) for filter_list in
+		                                    [song_names]]
 		song_names.sort()
 		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names)
 
