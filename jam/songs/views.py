@@ -5,6 +5,7 @@ from jam.songs.models import Song
 from jam.users.models import User
 import random
 import pickle
+from jam.songs.views import Song
 from jam.users.helpers import check_password, hash_pwd
 import requests
 import urllib,json
@@ -12,17 +13,16 @@ import urllib,json
 
 def landing():
 	if request.method == 'GET':
-		return render_template("static_pages/index.html", current_user=current_user)
-	#if request.method == 'POST':
-		#redirect to some new unique URL if create
-		#redirect to created url if join + enter unique code
+		song_names = DB.session.query(distinct(Song.name)).all()
+        song_names.sort()
+		return render_template("static_pages/index.html", song_names=song_names)
 
 
 def error404():
-	return render_template("static_pages/404.html", current_user=current_user)
+	return render_template("static_pages/404.html")
 
 def error500():
-	return render_template("static_pages/error.html", current_user=current_user)
+	return render_template("static_pages/error.html")
 
 @login_required
 def logout():
