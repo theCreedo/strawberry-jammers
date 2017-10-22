@@ -1,7 +1,7 @@
 var counter = 0;
 var song_count = 0;
-var song_name = ["a", "b", "c", "d", "e", "f"]
-var lyrics = []
+var song_name = ["Sweetly Broken", "How Great Is Our God", "Center My Life", "King of Love", "Glorious Grace", "How He Loves", "Marvelous Light", "The Lion and the Lamb", "Pharoah Pharoah", "Before the Throne of God Above"]
+var lyrics = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6']
 var lyrics_counter = 0;
 
 function populate_search_results() {
@@ -9,7 +9,7 @@ function populate_search_results() {
 
 	document.getElementById('search_results').classList.remove('hide');
 
-	for (var i = 1; i < 6; i++) {
+	for (var i = 1; i < song_name.length; i++) {
 		var song_item = '<a id="song' 
 		+ i.toString()
 		+ '" href="#" class="list-group-item" onclick="addSong()">'																
@@ -38,10 +38,12 @@ function addEventListener() {
 		var tab_item = '<div id="' + id + '" class="tab-pane fade in">'
 		+ '<div>';
 
-		//tab_item += // lyrics here
+		tab_item += lyrics[lyrics_counter];
 		tab_item = tab_item + '</div>';
+		lyrics_counter++;
 
-		var new_id = "song" + (song_count+2) + '0';
+
+		var new_id = "hello" + song_count + '0';
 
 		$(tab_item).appendTo('#tab-master');
 
@@ -49,12 +51,12 @@ function addEventListener() {
 			var newBody = document.getElementById("songListActual").innerHTML;
 			document.getElementById("songListContainer").innerHTML = newBody;
 
-			var toAdd = '<p><a id ="' + new_id + '" href="#' + id + '" class="list-group-item active">' + $(this).text() + '</a></p>';
+			var toAdd = '<p><a id ="' + new_id + '" class="list-group-item active">' + $(this).text() + '</a></p>';
 			$(toAdd).appendTo('#songListContainer');
 		}
 
 		else {
-			var toAdd = '<p><a id="' + new_id + '"href="#' + id + '" class="list-group-item">' + $(this).text() + '</a></p>';
+			var toAdd = '<p><a id="' + new_id + '" class="list-group-item">' + $(this).text() + '</a></p>';
 			$(toAdd).appendTo('#songListContainer');
 		}
 
@@ -71,4 +73,3 @@ function addEventListener() {
 
 function addEventListenerForSongView() {
 	$(this).addClass('active')}
-	
