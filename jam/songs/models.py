@@ -2,6 +2,9 @@ from jam.app import DB
 #from flask_user import UserMixin
 from jam.users.helpers import hash_pwd
 
+songs_join = DB.Table('songs_join',
+	DB.Column('song_id', DB.Integer, DB.ForeignKey('songs.id'), primary_key=True),
+	DB.Column('songset_id', DB.Integer, DB.ForeignKey('songsets.id'), primary_key=True))
 
 class Song(DB.Model):
     __tablename__ = 'songs'
@@ -20,7 +23,7 @@ class SongSet(DB.Model):
 	id = DB.Column(DB.Integer, primary_key=True)
 	name = DB.Column(DB.String(255)) #name of group/set
 	key = DB.Column(DB.String(6)) #url key
-	songs = DB.relationship('Song', lazy=False)
+	songs_join = DB.relationship('Song', secondary=songs_join, backref=DB.backref('songs', lazy=True))
 
 	def __init__(self, dictionary):
 		self.name = dictionary['name']

@@ -133,7 +133,7 @@
 
 	// Join session
 	function joinSession() {
-		document.getElementById('modal-body').innerHTML = 'worked';
+		document.getElementById('modal-body').innerHTML = 'Session does not exist! Please try again.';
 	}
 
 </script>
@@ -186,7 +186,7 @@
 									</button>
 								</div>
 								<input type="text" class="form-control" placeholder="Enter ID"
-								onkeyup = "if (event.keyCode == 13)">
+								onkeyup = "if (event.keyCode == 13);">
 							</div>
 						</form>
 
@@ -215,10 +215,7 @@
 		<!-- TO DO: Implement a function that changes songListContainer to songListActual.
 		AND for every selected song, display a list-grou-item. -->
 		<!-- Actual Song List -->
-		<div id="songListActual" class="col-sm-2 sidenav list-group text-center hide">
-			<p><a href="#" class="list-group-item active">Song</a></p>
-			<p><a href="#" class="list-group-item" >Song</a></p>
-		</div>
+		<div id="songListActual" class="col-sm-2 sidenav list-group text-center hide"></div>
 		<!-- Actual Song List -->
 
 
@@ -234,7 +231,7 @@
 						</button>
 					</div>
 					<input id='user-input' type="text" class="form-control" placeholder="Search" 
-					onkeyup = "if (event.keyCode == 13)">
+					onkeyup = "if (event.keyCode == 13);">
 				</div>
 			</form>
 			<!-- Search Bar -->
@@ -245,19 +242,14 @@
 			<ul id = 'song-list' class="nav nav-tabs">
 
 				<!-- TO DO: Show search results when a search is performed -->
-				<li class="active hide"><a data-toggle="tab" href="#search">Search Results</a></li>
-
-				<!-- TO DO: For every song in a variable that stores the user's selected songs, 
-				create a tab for that song -->
-				<li id='results_string' class="hide"><a data-toggle="tab" href="#">Search Results</a></li>
-
-				</ul>
+				<li id = 'search_results' class="active hide"><a data-toggle="tab" href="#search">Search Results</a></li>
+			</ul>
 			<!-- Tab Names -->
 
 
 
 			<!-- Tab Content -->
-			<div class="tab-content">
+			<div id = 'tab-master' class="tab-content">
 
 				<!-- Search Tab -->
 				<div id="search" class="tab-pane fade in active">

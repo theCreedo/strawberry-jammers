@@ -16,9 +16,11 @@ import pickle
 DB = SQLAlchemy()
 
 # from dishes.models import Dish
-from jam.users.models import User
+from jam.songs.models import Song, SongSet
 # import jam.routes
 from jam import routes
+from jam.songs.genius import *
+
 
 # def configure_login(app):
 #     login_manager = LoginManager()
@@ -109,6 +111,28 @@ def setup_error_handlers(app):
 #             DB.session.add(dish)
 #             DB.session.commit()
 
+def populate_db(jam_app):
+    
+    with jam_app.app_context():
+        g = Genius(settings.GENIUS_KEY)
+        sets = [['What a beautiful name', '10,000 reasons bless the Lord', 'He is exalted'], ['Touch the sky', 'Oceans']]
+        for s in sets:
+            sset = SongSet({'name': 'im a songset', 'key': '242iuh', 'songs': []})
+
+            for song in s:
+                searchresults = g.search(song)
+                # send searchresults to frontend
+                # get song entry back
+                songentry = g.hitstoreadable(searchresults)[0]
+                lyrics = g.get_lyrics(songentry['api_path'])
+                songentry['lyrics'] = lyrics
+                newsong = Song(songentry)
+                sset.songs_join.append(newsong)
+                DB.session.add(newsong)
+            DB.session.add(sset)
+            DB.session.commit()
+            
+
 def create_app():
     app = flask.Flask(__name__)
     app.config.from_object(settings)
@@ -131,3 +155,4 @@ def create_app():
     return app
 
 jam_app = create_app()
+populate_db(jam_app)

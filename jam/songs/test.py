@@ -20,5 +20,4 @@ for s in sets:
 		with jam_app.app_context():
 			DB.session.add(sset)
 			DB.session.commit()
-
-
+			
