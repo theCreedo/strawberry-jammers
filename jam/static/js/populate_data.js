@@ -26,6 +26,11 @@ var song_name = $.ajax({
 function populate_search_results() {
 	// song_name = document.getElementById('user-input').value;
 
+	var loader = document.getElementById('loader2');
+	loader.remove('')
+	awaitSleep(2000);
+	remove_loader();
+
 	document.getElementById('search_results').classList.remove('hide');
 
 	// console.log("song name: " song_name[0])
@@ -93,4 +98,13 @@ function addEventListener() {
 };
 
 function addEventListenerForSongView() {
-	$(this).addClass('active')}
+	$(this).addClass('active')
+}
+
+function remove_loader() {
+	$('#loader2').addClass('hide');
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
