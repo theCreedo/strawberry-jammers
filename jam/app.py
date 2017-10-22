@@ -155,4 +155,5 @@ def create_app():
     return app
 
 jam_app = create_app()
-populate_db(jam_app)
+# populate_db(jam_app)
+
