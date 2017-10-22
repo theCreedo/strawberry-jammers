@@ -12,10 +12,15 @@ import urllib,json
 
 def landing():
 	if request.method == 'GET':
-		return render_template("static_pages/index.html", current_user=current_user)
+		song_names = ["Sweetly Broken", "How Great Is Our God"]
+		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names)
 	#if request.method == 'POST':
 		#redirect to some new unique URL if create
 		#redirect to created url if join + enter unique code
+
+# def getSongNames():
+# 	song_name = ["Sweetly Broken", "How Great Is Our God"]
+# 	return song_name
 
 
 def error404():
