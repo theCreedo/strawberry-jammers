@@ -9,12 +9,21 @@ from jam.songs.views import Song
 from jam.users.helpers import check_password, hash_pwd
 import requests
 import urllib,json
+from sqlalchemy import distinct
 
 
 def landing():
 	if request.method == 'GET':
 		song_names = DB.session.query(distinct(Song.name)).all()
-        song_names.sort()
+		# song_names = [filter(lambda x: x[0] is not None, filter_list) for filter_list in
+		#                                     [song_names]]
+		# song_names = [map(lambda x: x[0], filter_list) for filter_list in
+		#                                     [song_names]]
+		song_names.sort()
+		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names)
+	else:
+		song_names = DB.session.query(distinct(Song.name)).all()
+		song_names.sort()
 		return render_template("static_pages/index.html", current_user=current_user, song_names=song_names)
 
 # def getSongNames():

@@ -12,24 +12,24 @@ lyrics = ['To the cross I look, to the cross I cling<br>Of its suffering I do dr
 var lyrics_counter = 0;
 
 
-var song_name = $.ajax({
-	url: '/getSongName',
-	success: function(data) {
-		console.log(data);
-	},
-	error: function() {
-		console.log('error found')
-	}
+// var song_name = $.ajax({
+// 	url: '/getSongName',
+// 	success: function(data) {
+// 		console.log(data);
+// 	},
+// 	error: function() {
+// 		console.log('error found')
+// 	}
 
-});
+// });
 
 function populate_search_results() {
 	// song_name = document.getElementById('user-input').value;
 
-	var loader = document.getElementById('loader2');
-	loader.remove('')
-	awaitSleep(2000);
-	remove_loader();
+	// var loader = document.getElementById('loader2');
+	// loader.remove('')
+	// awaitSleep(2000);
+	// remove_loader();
 
 	document.getElementById('search_results').classList.remove('hide');
 

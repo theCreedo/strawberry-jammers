@@ -5,6 +5,7 @@ from flask import g, request, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, current_user
 # from flask.ext.cdn import CDN
+from flask_wtf.csrf import CSRFProtect
 from flask_sslify import SSLify
 # from flask_redis import Redis
 import sendgrid
@@ -21,6 +22,7 @@ from jam.songs.models import Song, SongSet
 from jam import routes
 from jam.songs.genius import *
 
+csrf = CSRFProtect()
 
 # def configure_login(app):
 #     login_manager = LoginManager()
@@ -139,6 +141,7 @@ def create_app():
 
     DB.init_app(app)
 
+    csrf.init_app(app)
     # redis_store.init_app(app)
     routes.configure_routes(app)
     # configure_login(app)

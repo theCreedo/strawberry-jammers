@@ -20,11 +20,67 @@
 		font-size: 17px;
 	}
 
+
+	.search input[type=text], .search form input[type=number], form .search input[type=number], .search form textarea, form .search textarea {
+	  text-align: left; }
+	.search .chosen-container {
+	  width: 100% !important; }
+	.search .row {
+	  margin-bottom: 10px; }
+	.search button {
+	  display: block; }
 	#snackbar.show {
 		visibility: visible;
 		-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 		animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	}
+
+  input {
+	&[type=text], &[type=password], &[type=date], &[type=email], &[type=tel] {
+	  -webkit-appearance: none;
+	  -moz-appearance: none;
+	  appearance: none;
+	  outline: 0;
+          width: 250px;
+          margin: 0 auto 10px auto;
+          text-align: center;
+	  border: 1px solid rgba(255, 255, 255, 0.4);
+	  background-color: rgba(255, 255, 255, 0.2);
+	  border-radius: 3px;
+	  padding: 10px 15px;
+          margin-bottom: 10px;
+	  display: block;
+	  color: #FFF;
+	  -webkit-transition-duration: 0.25s;
+	  transition-duration: 0.25s;
+	  font-weight: 300;
+	  &::selection {
+		color: white;
+		background: rgba(mix($dark, $light), 0.75); /* WebKit/Blink Browsers */
+	  }
+
+	  &:hover {
+		background-color: rgba(255, 255, 255, 0.4);
+	  }
+
+	  &:focus {
+		background-color: white;
+		color: $dark;
+	  }
+          &:invalid {
+              box-shadow: none;
+          }
+	}
+
+	&[type=number] {
+	  @extend [type=text];
+	  display: inline;
+	  width: 100px;
+	  &:focus {
+		width: 150px;
+	  }
+	}
+  }
 
 	#snackbar2 {
 		visibility: hidden;
@@ -204,7 +260,13 @@
 	<!-- Mobile Friendly -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.3.2/hint.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../../static/js/populate_data.js"></script>
@@ -362,7 +424,7 @@
 		<div class="col-sm-8">
 
 			<!-- Search Bar -->
-			<form>
+			<div>
 				<div class="input-group">
 					<div class="input-group-btn">
 						<button id='search-button' class="btn btn-default" type="submit" onclick="populate_search_results()">
@@ -372,7 +434,7 @@
 					<input id='user-input' type="text" class="form-control" placeholder="Search" 
 					onkeyup = "if (event.keyCode == 13);">
 				</div>
-			</form>
+			</div>
 			<!-- Search Bar -->
 
 			<br>
@@ -406,7 +468,26 @@
 
 				<!-- TO DO: For every selected song (i.e. a song with its own tab) 
 				display it's lyrics -->
- 				{% for song_name in song_names %}
+
+
+<!-- 
+	    		<div class="search">
+	    			<form method="POST" action="{{ url_for('landing') }}">
+            			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+			            {#	Song Name #}
+			            <div class="row">
+			                <div class="col-md-6 col-md-offset-3">
+			                    <select name="song_name" multiple class="chosen-select" data-placeholder="Song Names">
+		 							{% for song_name in song_names %}
+			                            <option value="{{ song_name }}">{{ song_name }}</option>
+			                        {% endfor %}
+			                    </select>
+			                </div>
+			            </div>
+            			<button type="submit center-block ">Submit</button>
+			        </form>
+		        </div> -->
+<!--  				{% for song_name in song_names %}
 
 				<div class="tab-pane fade">
 					<h3>Song Name</h3>
@@ -414,7 +495,7 @@
 				</div>
 
 				{% endfor %}
-				<!-- Song Tab -->
+ -->				<!-- Song Tab -->
 
 
 			</div>
@@ -436,11 +517,7 @@
 	<!-- Snackbar Session Created-->
 
 
-<<<<<<< HEAD
-=======
 	<script src="../static/js/populate_data.js"></script>
-
->>>>>>> 1d440efbfc5af724f3f35764677dca1ddf18ce81
 
 </body>
 <!-- Body -->
